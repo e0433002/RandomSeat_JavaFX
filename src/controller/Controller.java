@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import model.Seat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -25,7 +25,7 @@ public class Controller implements Initializable {
 	private TextField numInput;
 	
 	private int seatNum = 46;
-	private Label[] label = new Label[50];
+	private Seat[] label = new Seat[50];
 	
 	
 	@Override
@@ -38,12 +38,9 @@ public class Controller implements Initializable {
 		for(int i = 0 ; i < 5 ; i++){
 			for(int j = 0 ; j < 10 ; j++){
 				int num = 10*i+j;
-				label[num] = new Label("   ");
-				label[num].setStyle("-fx-padding: 0 10 10 10;"
-						+ "-fx-font-size: 15px;"
-						+ "-fx-background-color: rgba(0,0,0,0.07), linear-gradient(#5a61af, #51536d), linear-gradient(#e4fbff 0%, #cee6fb 10%, #a5d3fb 50%, #88c6fb 51%, #d5faff 100%);");
-				
-				grid.add(label[num], j, i);
+				label[num] = new Seat();
+				label[num].setXY(i, j);
+				grid.add(label[num], label[num].y, label[num].x);
 			}
 		}
 	}
@@ -54,7 +51,9 @@ public class Controller implements Initializable {
 		for(int i = 0 ; !seatList.isEmpty() ; i++){
 			if(i / 10 == 0 && i % 10 == 0) continue;
 			if(i / 10 == 0 && i % 10 > 7) continue;
-			label[i].setText(String.valueOf(seatList.remove(0) + 1));
+			String insertNum = String.valueOf(seatList.remove(0) + 1);
+			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";
+			label[i].setText(insertNum);
 		}
 	}
 	
@@ -90,7 +89,7 @@ public class Controller implements Initializable {
 	}
 	
 	public void initSeat(){
-		for(int i = 0 ; i < 50 ; i++) label[i].setText("   ");
+		for(int i = 0 ; i < 50 ; i++) label[i].setText(label[i].initSeat);
 	}
 	
 	public void stop(){
