@@ -16,6 +16,8 @@ public class Controller implements Initializable {
 	@FXML
 	private GridPane grid;
 	@FXML
+	private Button clrBtn;
+	@FXML
 	private Button refBtn;
 	@FXML
 	private Button cnlBtn;
@@ -24,36 +26,44 @@ public class Controller implements Initializable {
 	@FXML
 	private TextField numInput;
 	
-	private int seatNum = 46;
-	private Seat[] label = new Seat[50];
+	private int seatNum = 46;	// default number of member
+	private Seat[] seats = new Seat[50];
 	
+	int column = 8;
+	int row = seatNum / column + 1;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+//		int column = 8;
+//		int row = seatNum / column + 1;
+		numInput.setText(""+seatNum);
+		
+		for(int i = 0 ; i < row ; i++){
+			for(int j = 0 ; j < column ; j++){
+				int num = column*i+j;
+				seats[num] = new Seat();
+				seats[num].setXY(i, j);
+				grid.add(seats[num], seats[num].y, seats[num].x);
+			}
+		}
+		
+		clrBtn.setVisible(false);
+		clrBtn.setOnAction( (ActionEvent e) -> {	// test
+		});
+		
 		submit.setOnAction( (ActionEvent e) -> {
 			String s = numInput.getText();
 			seatNum = checkLegal(s);
 		});
-		
-		for(int i = 0 ; i < 5 ; i++){
-			for(int j = 0 ; j < 10 ; j++){
-				int num = 10*i+j;
-				label[num] = new Seat();
-				label[num].setXY(i, j);
-				grid.add(label[num], label[num].y, label[num].x);
-			}
-		}
 	}
 	
-	public void refreshSite(ActionEvent event){
+	public void refreshSite(ActionEvent event) throws InterruptedException{
 		ArrayList<Integer> seatList = seatAssign();
 		initSeat();
 		for(int i = 0 ; !seatList.isEmpty() ; i++){
-			if(i / 10 == 0 && i % 10 == 0) continue;
-			if(i / 10 == 0 && i % 10 > 7) continue;
 			String insertNum = String.valueOf(seatList.remove(0) + 1);
 			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";
-			label[i].setText(insertNum);
+			seats[i].setText(insertNum);
 		}
 	}
 	
@@ -89,7 +99,7 @@ public class Controller implements Initializable {
 	}
 	
 	public void initSeat(){
-		for(int i = 0 ; i < 50 ; i++) label[i].setText(label[i].initSeat);
+		for(int i = 0 ; i < row * column ; i++) seats[i].setText(seats[i].initSeat);
 	}
 	
 	public void stop(){
