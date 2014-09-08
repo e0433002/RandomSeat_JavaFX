@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import model.Seat;
+import javafx.animation.AnimationTimer;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -47,8 +50,29 @@ public class Controller implements Initializable {
 			}
 		}
 		
-		clrBtn.setVisible(false);
+		//clrBtn.setVisible(false);
 		clrBtn.setOnAction( (ActionEvent e) -> {	// test
+			new AnimationTimer() {
+				@Override
+				public void handle(long now) {
+					ObservableList<Node> childrens = grid.getChildren();
+					Seat result = null;
+					for(Node node : childrens) {
+			            if(GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
+			                result = (Seat) node;
+			                break;
+			            }
+			        }
+					if(result.isVisible()) result.setVisible(false);
+					else result.setVisible(true);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}.start();
 		});
 		
 		submit.setOnAction( (ActionEvent e) -> {
