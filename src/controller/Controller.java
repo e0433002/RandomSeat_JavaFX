@@ -37,10 +37,7 @@ public class Controller implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		int column = 8;
-//		int row = seatNum / column + 1;
 		numInput.setText(""+seatNum);
-		
 		for(int i = 0 ; i < row ; i++){
 			for(int j = 0 ; j < column ; j++){
 				int num = column*i+j;
