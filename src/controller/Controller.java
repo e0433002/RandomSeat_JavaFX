@@ -4,13 +4,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import model.AnimateController;
 import model.Seat;
-import javafx.animation.AnimationTimer;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -47,29 +45,9 @@ public class Controller implements Initializable {
 			}
 		}
 		
-		//clrBtn.setVisible(false);
+		clrBtn.setVisible(false);
 		clrBtn.setOnAction( (ActionEvent e) -> {	// test
-			new AnimationTimer() {
-				@Override
-				public void handle(long now) {
-					ObservableList<Node> childrens = grid.getChildren();
-					Seat result = null;
-					for(Node node : childrens) {
-			            if(GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
-			                result = (Seat) node;
-			                break;
-			            }
-			        }
-					if(result.isVisible()) result.setVisible(false);
-					else result.setVisible(true);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}.start();
+			
 		});
 		
 		submit.setOnAction( (ActionEvent e) -> {
@@ -83,25 +61,25 @@ public class Controller implements Initializable {
 		initSeat();
 		for(int i = 0 ; !seatList.isEmpty() ; i++){
 			String insertNum = String.valueOf(seatList.remove(0) + 1);
-			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";
-			seats[i].setText(insertNum);
+			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";			
+			seats[i].setSeatNumStr(insertNum);
+//			seats[i].setText(insertNum);
 		}
+		//new Animater(seats).start();
+		new AnimateController(seats);
 	}
 	
 	public ArrayList<Integer> seatAssign(){
 		ArrayList<Integer> seatList = new ArrayList<>();
 		ArrayList<Integer> random = new ArrayList<>();
 		
-		for(int i = 0 ; i < seatNum ; i++)
-			seatList.add(i);
+		for(int i = 0 ; i < seatNum ; i++) seatList.add(i);
 		
 		while(!seatList.isEmpty()){
 			int num = seatList.size();
 			int seat = (int)(Math.random() * num);
-			
 			random.add(seatList.remove(seat));
 		}
-		
 		return random;
 	}
 	
