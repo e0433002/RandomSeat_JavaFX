@@ -1,22 +1,14 @@
 package model;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.layout.GridPane;
 
-public class Animater extends AnimationTimer {
-	GridPane grid = null;
+public class AnimateSequnce extends AnimationTimer {
 	Seat[] seats;
 	int row = 0;
 	int column = 0;
 	
-	public Animater(Seat[] seats){
+	public AnimateSequnce(Seat[] seats){
 		this.seats = seats;
-	}
-	public Animater(GridPane grid, Seat[] seats, int row, int column){
-		this.grid = grid;
-		this.seats = seats;
-		this.row = row;
-		this.column = column;
 	}
 	
 	int count = 0;

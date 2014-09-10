@@ -1,7 +1,10 @@
 package model;
 
 public class AnimateController {
+	Seat[] seats;
 	public AnimateController(Seat[] seats) {
-		new Animater(seats).start();
+//		new AnimateSequnce(seats).start();
+		new AnimateRandom(seats).start();
 	}
 }
+

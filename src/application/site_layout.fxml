@@ -16,7 +16,8 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints />
+      <ColumnConstraints />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
@@ -34,19 +35,14 @@
    <children>
       <HBox GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="7">
          <children>
-            <Button fx:id="refBtn" alignment="CENTER" mnemonicParsing="false" onAction="#refreshSite" prefHeight="23.0" prefWidth="61.0" text="Refresh" textAlignment="JUSTIFY">
+            <Button fx:id="refBtn" alignment="CENTER" mnemonicParsing="false" onAction="#refreshSite" prefHeight="23.0" prefWidth="64.0" text="Refresh" textAlignment="JUSTIFY">
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin>
             </Button>
             <Button fx:id="CnlBtn" cancelButton="true" mnemonicParsing="false" onAction="#stop" prefHeight="23.0" prefWidth="64.0" text="Cancel" textAlignment="JUSTIFY">
                <HBox.margin>
-                  <Insets top="5.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="clrBtn" mnemonicParsing="false" text="Test">
-               <HBox.margin>
-                  <Insets top="5.0" />
+                  <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </Button>
          </children>

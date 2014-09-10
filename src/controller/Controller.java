@@ -17,8 +17,6 @@ public class Controller implements Initializable {
 	@FXML
 	private GridPane grid;
 	@FXML
-	private Button clrBtn;
-	@FXML
 	private Button refBtn;
 	@FXML
 	private Button cnlBtn;
@@ -44,11 +42,6 @@ public class Controller implements Initializable {
 				grid.add(seats[num], seats[num].y, seats[num].x);
 			}
 		}
-		
-		clrBtn.setVisible(false);
-		clrBtn.setOnAction( (ActionEvent e) -> {	// test
-			
-		});
 		
 		submit.setOnAction( (ActionEvent e) -> {
 			String s = numInput.getText();
