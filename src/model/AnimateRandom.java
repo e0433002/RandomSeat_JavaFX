@@ -11,7 +11,7 @@ class AnimateRandom extends AnimationTimer {
 	int seatPos;
 	int count = 0;
 	int gleamTimes = 5;
-	int sleepMillis = 250;
+	int sleepMillis = 200;
 	
 	public AnimateRandom(Seat[] seats) {
 		this.seats = seats;
@@ -21,7 +21,7 @@ class AnimateRandom extends AnimationTimer {
 		Random ran = new Random();
 		
 		if(count == 0) this.seatPos = getRemainSeatPos(ran);	// element first parameter initial
-		initGrid();
+		initGridPerFresh();
 		if(count == gleamTimes) {	// switch to other seat and set seat
 			count = 0;
 			seats[seatPos].setText(seats[seatPos].getSeatNumStr());
@@ -33,12 +33,12 @@ class AnimateRandom extends AnimationTimer {
 			count++;
 		}
 		sleep(sleepMillis);
-		if(hasBeenSet.size() == seatSize()) this.stop();	// finish animate
+		if(hasBeenSet.size() == this.getSeatsSize()) this.stop();	// finish animate
 	}
 	
 	private int getRemainSeatPos(Random ran) {
 		while(true) {
-			int seatPos = ran.nextInt(seatSize());
+			int seatPos = ran.nextInt(this.getSeatsSize());
 			Boolean notBeSet = true;
 			for(Integer s : hasBeenSet) {
 				if(seatPos == s) {
@@ -49,20 +49,20 @@ class AnimateRandom extends AnimationTimer {
 			if(notBeSet) return seatPos;
 		}
 	}
-	private void initGrid() {
-		for(int i = 0 ; i < seatSize() ; i++){
-			Boolean initSeatOrNot = true;
+	private void initGridPerFresh() {
+		for(int i = 0 ; i < this.getSeatsSize() ; i++){
+			Boolean initThisSeatOrNot = true;
 			for(Integer s : hasBeenSet){
 				if(i == s) {
-					initSeatOrNot = false;
+					initThisSeatOrNot = false;
 					break;
 				}
 			}
-			if(initSeatOrNot)
+			if(initThisSeatOrNot)
 				seats[i].setText(""+seats[i].initSeat);
 		}
 	}
-	private int seatSize() {
+	private int getSeatsSize() {
 		int count = 0;
 		for(Seat node : seats){
 			if(node.getSeatNum() == 0) return count;

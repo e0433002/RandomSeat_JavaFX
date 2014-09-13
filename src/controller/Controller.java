@@ -28,8 +28,9 @@ public class Controller implements Initializable {
 	private int seatNum = 46;	// default number of member
 	private Seat[] seats = new Seat[50];
 	
-	int column = 8;
+	int column = 6;
 	int row = seatNum / column + 1;
+	static AnimateController animateController = new AnimateController();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -49,17 +50,16 @@ public class Controller implements Initializable {
 		});
 	}
 	
-	public void refreshSite(ActionEvent event) throws InterruptedException{
+	public void refreshSite(ActionEvent event) throws InterruptedException{	// refBtn trigger
 		ArrayList<Integer> seatList = seatAssign();
 		initSeat();
 		for(int i = 0 ; !seatList.isEmpty() ; i++){
 			String insertNum = String.valueOf(seatList.remove(0) + 1);
 			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";			
 			seats[i].setSeatNumStr(insertNum);
-//			seats[i].setText(insertNum);
 		}
-		//new Animater(seats).start();
-		new AnimateController(seats);
+		animateController.startAnimate(seats);
+		showInConsole();	// for debug
 	}
 	
 	public ArrayList<Integer> seatAssign(){
@@ -94,8 +94,20 @@ public class Controller implements Initializable {
 		for(int i = 0 ; i < row * column ; i++) seats[i].setText(seats[i].initSeat);
 	}
 	
-	public void stop(){
+	public void stop(){		// cnlBtn trigger
 		System.out.println("stop");
 		System.exit(0);
+	}
+	
+	public void showInConsole(){	// use to debug
+		System.out.println("-------Grid-------");
+		for(int i = 0 ; i < row ; i++){
+			for(int j = 0 ; j < column ; j++){
+				if(i*column+j == seatNum) break;
+				System.out.printf("%2d ", seats[i*column+j].getSeatNum());
+			}
+			System.out.println();
+		}
+		System.out.println("-------____-------");
 	}
 }

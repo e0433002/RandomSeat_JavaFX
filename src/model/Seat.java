@@ -11,11 +11,12 @@ public class Seat extends Label{
 	
 	public Seat(){
 		this.setText(initSeat);
-		this.setStyle("-fx-padding: 5 10 5 10;"
+		this.setStyle("-fx-margin: 0;"
+				+ "-fx-padding: 5 10 5 10;"
 				+ "-fx-font-size: 15px;"
 				+ "-fx-text-fill: rgba(255,255,255,1);"
 				+ "-fx-background-color: rgba(0,0,0,0.07), "
-				+ "linear-gradient(#EBE0D6 0%, #B89470 10%, #996633 50%, #5C3D1F 51%, #8D7762 100%);");
+				+ "linear-gradient(#EBE0D6 0%, #B89470 10%, #996633 50%, #5C3D1F 65%, #8D7762 100%);");
 	}
 	
 	public void setXY(int x, int y){

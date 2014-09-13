@@ -22,25 +22,5 @@ public class AnimateSequnce extends AnimationTimer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-//		ObservableList<Node> childrens = grid.getChildren();
-//		Seat result = null;
-//		childrens = clearObservableList(childrens);	// remove child like HBox ...etc
-//		for(Node node : childrens) {
-//            if(GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
-//                result = (Seat) node;
-//                //System.out.println(result.seatNum);
-//                break;
-//            }
-//		}
 	}
-	
-//	private ObservableList<Node> clearObservableList(ObservableList<Node> childrens) {
-//		Stack<Node> removeList = new Stack<>();
-//		for(Node node : childrens) {
-//			if(node instanceof Seat) continue;
-//			else removeList.push(node);
-//		}
-//		for(Node node : removeList) childrens.remove(node);
-//		return childrens;
-//	}
 }

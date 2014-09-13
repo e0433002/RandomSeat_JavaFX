@@ -6,18 +6,16 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:id="grid" prefHeight="280.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<GridPane fx:id="grid" prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints />
-      <ColumnConstraints />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="80.0" prefWidth="80.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="80.0" prefWidth="80.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="80.0" prefWidth="80.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="80.0" prefWidth="80.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="80.0" prefWidth="80.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="100.0" minWidth="80.0" prefWidth="80.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
@@ -28,26 +26,28 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
       <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
       <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
       <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
   </rowConstraints>
    <children>
-      <HBox GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="7">
+      <HBox maxHeight="500.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="9">
          <children>
             <Button fx:id="refBtn" alignment="CENTER" mnemonicParsing="false" onAction="#refreshSite" prefHeight="23.0" prefWidth="64.0" text="Refresh" textAlignment="JUSTIFY">
                <HBox.margin>
-                  <Insets top="5.0" />
+                  <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="CnlBtn" cancelButton="true" mnemonicParsing="false" onAction="#stop" prefHeight="23.0" prefWidth="64.0" text="Cancel" textAlignment="JUSTIFY">
+            <Button fx:id="cnlBtn" cancelButton="true" mnemonicParsing="false" onAction="#stop" prefHeight="23.0" prefWidth="64.0" text="Cancel" textAlignment="JUSTIFY">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="7">
+      <HBox maxHeight="500.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="9">
          <children>
             <Label fx:id="memLab" prefHeight="19.0" prefWidth="109.0" text="Member Num:" wrapText="true">
                <HBox.margin>
@@ -57,7 +57,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="numInput" prefHeight="23.0" prefWidth="58.0">
+            <TextField fx:id="numInput" prefHeight="23.0" prefWidth="39.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
