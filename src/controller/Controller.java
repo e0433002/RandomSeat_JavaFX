@@ -10,31 +10,34 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class Controller implements Initializable {
-	@FXML
-	private GridPane grid;
-	@FXML
-	private Button refBtn;
-	@FXML
-	private Button cnlBtn;
-	@FXML
-	private Button submit;
-	@FXML
-	private TextField numInput;
+	@FXML private GridPane grid;
+	@FXML private Button refBtn;
+	@FXML private Button cnlBtn;
+	@FXML private Button submit;
+	@FXML private Button sglBtn;		// not implement
+	@FXML private TextField numInput;
+	@FXML private TextField sglInput;	// not implement
+	@FXML private CheckBox sglChkBox; // not implement
 	
 	private int seatNum = 46;	// default number of member
-	private Seat[] seats = new Seat[50];
-	
+	private int limitSeatNum = 48;
+	private Seat[] seats = new Seat[limitSeatNum];
 	int column = 6;
 	int row = seatNum / column + 1;
 	static AnimateController animateController = new AnimateController();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		sglBtn.setVisible(false);
+		sglInput.setVisible(false);
+		
 		numInput.setText(""+seatNum);
+		
 		for(int i = 0 ; i < row ; i++){
 			for(int j = 0 ; j < column ; j++){
 				int num = column*i+j;
@@ -46,34 +49,48 @@ public class Controller implements Initializable {
 		
 		submit.setOnAction( (ActionEvent e) -> {
 			String s = numInput.getText();
-			seatNum = checkLegal(s);
+			seatNum = checkLegal(s);	// reset seaNum
+			row = seatNum / column + 1;	// reset row 
 		});
 	}
 	
-	public void refreshSite(ActionEvent event) throws InterruptedException{	// refBtn trigger
-		ArrayList<Integer> seatList = seatAssign();
-		initSeat();
-		for(int i = 0 ; !seatList.isEmpty() ; i++){
-			String insertNum = String.valueOf(seatList.remove(0) + 1);
-			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";			
-			seats[i].setSeatNumStr(insertNum);
-		}
+	public void refreshSite(ActionEvent event) {	// refBtn trigger
+		seatAssign();
 		animateController.startAnimate(seats);
 		showInConsole();	// for debug
 	}
 	
-	public ArrayList<Integer> seatAssign(){
-		ArrayList<Integer> seatList = new ArrayList<>();
-		ArrayList<Integer> random = new ArrayList<>();
-		
-		for(int i = 0 ; i < seatNum ; i++) seatList.add(i);
-		
-		while(!seatList.isEmpty()){
-			int num = seatList.size();
+	public void seatAssign(){
+		ArrayList<Integer> iterateSeatList = new ArrayList<>();
+		ArrayList<Integer> randomSeatList = new ArrayList<>();
+
+		initSeat();
+		for(int i = 1 ; i <= seatNum ; i++) iterateSeatList.add(i);
+		// get iterateList random placing into randomList
+		while(!iterateSeatList.isEmpty()){
+			int num = iterateSeatList.size();
 			int seat = (int)(Math.random() * num);
-			random.add(seatList.remove(seat));
+			randomSeatList.add(iterateSeatList.remove(seat));
 		}
-		return random;
+		// set seat number to string and integer
+		for(int i = 0 ; !randomSeatList.isEmpty() ; i++){
+			String insertNum = String.valueOf(randomSeatList.remove(0));
+			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";			
+			seats[i].setSeatNumStrAndInt(insertNum);
+		}
+	}
+	
+	public void showItem(){
+		if(sglChkBox.isSelected()){
+			sglBtn.setVisible(true);
+			sglInput.setVisible(true);
+			refBtn.setVisible(false);
+		}
+		else{
+			sglBtn.setVisible(false);
+			sglInput.setVisible(false);
+			refBtn.setVisible(true);
+		}
 	}
 	
 	public int checkLegal(String s){
@@ -83,7 +100,7 @@ public class Controller implements Initializable {
 			int ten = (int) Math.pow(10, j++);
 			sum += (arr[i] - '0') * ten;
 		}
-		if(sum > 0 && sum <= 46) return sum;
+		if(sum > 0 && sum <= limitSeatNum) return sum;
 		else {
 			numInput.setText(String.valueOf(seatNum));
 			return seatNum;
@@ -91,7 +108,10 @@ public class Controller implements Initializable {
 	}
 	
 	public void initSeat(){
-		for(int i = 0 ; i < row * column ; i++) seats[i].setText(seats[i].initSeat);
+		for(int i = 0 ; i < limitSeatNum ; i++){
+			seats[i].setText(seats[i].initSeat);	// initialize panel
+			seats[i].setSeatNumStrAndInt("0");		// initialize data
+		}
 	}
 	
 	public void stop(){		// cnlBtn trigger

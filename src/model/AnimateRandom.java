@@ -11,7 +11,7 @@ class AnimateRandom extends AnimationTimer {
 	int seatPos;
 	int count = 0;
 	int gleamTimes = 5;
-	int sleepMillis = 200;
+	int sleepMillis = 0;
 	
 	public AnimateRandom(Seat[] seats) {
 		this.seats = seats;
@@ -68,7 +68,7 @@ class AnimateRandom extends AnimationTimer {
 			if(node.getSeatNum() == 0) return count;
 			count++;
 		}
-		return 0;
+		return seats.length;
 	}
 	
 	private void sleep(int millis) {

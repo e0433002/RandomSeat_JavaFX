@@ -75,5 +75,27 @@
             </Button>
          </children>
       </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="8">
+         <children>
+            <CheckBox fx:id="sglChkBox" mnemonicParsing="false" onAction="#showItem" prefHeight="33.0" prefWidth="57.0" text="Single Term" textAlignment="JUSTIFY" wrapText="true">
+               <HBox.margin>
+                  <Insets left="20.0" top="5.0" />
+               </HBox.margin>
+            </CheckBox>
+            <TextField fx:id="sglInput" prefHeight="20.0" prefWidth="35.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="sglBtn" mnemonicParsing="false" text="Single Flush">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </GridPane>

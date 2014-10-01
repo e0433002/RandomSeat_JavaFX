@@ -16,6 +16,14 @@ public class AnimateController {
 			animation = new AnimateRandom(seats);
 			animation.start();
 		}
+		else{
+			animation.stop();
+			animation = new AnimateRandom(seats);
+			animation.start();
+		}
+	}
+	
+	public void stop(){
 	}
 }
 

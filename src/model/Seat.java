@@ -24,7 +24,7 @@ public class Seat extends Label{
 		this.y = y;
 	}
 	
-	public void setSeatNumStr(String seatNumStr){
+	public void setSeatNumStrAndInt(String seatNumStr){
 		this.seatNumStr = seatNumStr;
 		this.seatNum = Integer.parseInt(seatNumStr.trim());
 	}
