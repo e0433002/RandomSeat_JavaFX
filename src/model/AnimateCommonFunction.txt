@@ -1,0 +1,34 @@
+	private int getRemainSeatPos(Random ran) {
+		while(true) {
+			int seatPos = ran.nextInt(this.getSeatsSize());
+			Boolean notBeSet = true;
+			for(Integer s : hasBeenSet) {
+				if(seatPos == s) {
+					notBeSet = false;
+					break;
+				}
+			}
+			if(notBeSet) return seatPos;
+		}
+	}
+	private void initGridPerFresh() {
+		for(int i = 0 ; i < this.getSeatsSize() ; i++){
+			Boolean initThisSeatOrNot = true;
+			for(Integer s : hasBeenSet){
+				if(i == s) {
+					initThisSeatOrNot = false;
+					break;
+				}
+			}
+			if(initThisSeatOrNot)
+				seats[i].setText(""+seats[i].initSeat);
+		}
+	}
+	private int getSeatsSize() {
+		int count = 0;
+		for(Seat node : seats){
+			if(node.getSeatNum() == 0) return count;
+			count++;
+		}
+		return seats.length;
+	}

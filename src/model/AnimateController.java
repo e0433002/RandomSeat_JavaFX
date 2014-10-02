@@ -1,29 +1,34 @@
 package model;
 
-import javafx.animation.AnimationTimer;
-
 public class AnimateController {
-//	Seat[] seats;
 	int count = 0;
-	AnimationTimer animation;
+	AnimateRandom animateRandom;
+	AnimateSingle animateSingle;
 	public AnimateController() {
 //		new AnimateSequnce(seats).start();
 		
 	}
 	
-	public void startAnimate(Seat[] seats){
-		if(animation == null){
-			animation = new AnimateRandom(seats);
-			animation.start();
+	public void startAnimateRandom(Seat[] seats){
+		if(animateRandom == null){
+			animateRandom = new AnimateRandom(seats);
+			animateRandom.start();
 		}
 		else{
-			animation.stop();
-			animation = new AnimateRandom(seats);
-			animation.start();
+			animateRandom.stop();
+			animateRandom = new AnimateRandom(seats);
+			animateRandom.start();
 		}
 	}
 	
-	public void stop(){
+	public void startAnimateSingle(Seat[] seats, int seatNum){
+		if(animateSingle == null){
+			animateSingle = new AnimateSingle(seats);
+			animateSingle.start(seatNum);
+		}
+		else{
+			animateSingle.start(seatNum);
+		}
 	}
 }
 

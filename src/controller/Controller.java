@@ -52,11 +52,17 @@ public class Controller implements Initializable {
 			seatNum = checkLegal(s);	// reset seaNum
 			row = seatNum / column + 1;	// reset row 
 		});
+		
+		sglBtn.setOnAction( (ActionEvent e) -> {
+			String s = sglInput.getText();
+			seatNum = checkLegal(s);
+			animateController.startAnimateSingle(seats, seatNum);
+		});
 	}
 	
 	public void refreshSite(ActionEvent event) {	// refBtn trigger
 		seatAssign();
-		animateController.startAnimate(seats);
+		animateController.startAnimateRandom(seats);
 		showInConsole();	// for debug
 	}
 	
@@ -82,15 +88,18 @@ public class Controller implements Initializable {
 	
 	public void showItem(){
 		if(sglChkBox.isSelected()){
+			seatAssign();
 			sglBtn.setVisible(true);
 			sglInput.setVisible(true);
 			refBtn.setVisible(false);
 		}
 		else{
+			initSeat();
 			sglBtn.setVisible(false);
 			sglInput.setVisible(false);
 			refBtn.setVisible(true);
 		}
+		showInConsole();
 	}
 	
 	public int checkLegal(String s){
