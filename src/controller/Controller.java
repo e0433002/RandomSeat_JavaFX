@@ -22,30 +22,37 @@ public class Controller implements Initializable {
 	@FXML private Button sglBtn;		// not implement
 	@FXML private TextField numInput;
 	@FXML private TextField sglInput;	// not implement
-	@FXML private CheckBox sglChkBox; // not implement
+	@FXML private CheckBox sglChkBox; 	// not implement
 	
+	int toolbarRowSpan = 2;
+	int column;
+	int row;
 	private int seatNum = 46;	// default number of member
-	private int limitSeatNum = 48;
-	private Seat[] seats = new Seat[limitSeatNum];
-	int column = 6;
-	int row = seatNum / column + 1;
+	private int limitSeatNum;
+	private Seat[] seats;
+	
 	static AnimateController animateController = new AnimateController();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		sglBtn.setVisible(false);
 		sglInput.setVisible(false);
+		column = grid.getColumnConstraints().size();
+		row = grid.getRowConstraints().size() - toolbarRowSpan;
+		limitSeatNum = row * column;
+		seats = new Seat[seatNum];
 		
-		numInput.setText(""+seatNum);
-		
-		for(int i = 0 ; i < row ; i++){
+		for(int i = 0, num = 0 ; i < row ; i++){
 			for(int j = 0 ; j < column ; j++){
-				int num = column*i+j;
+				if(isVacancy(i, j)) continue;
 				seats[num] = new Seat();
 				seats[num].setXY(i, j);
 				grid.add(seats[num], seats[num].y, seats[num].x);
+				num++;
 			}
 		}
+		
+		numInput.setText(""+seatNum);
 		
 		submit.setOnAction( (ActionEvent e) -> {
 			String s = numInput.getText();
@@ -63,6 +70,8 @@ public class Controller implements Initializable {
 	public void refreshSite(ActionEvent event) {	// refBtn trigger
 		seatAssign();
 		animateController.startAnimateRandom(seats);
+		if(animateController.getState()) refBtn.setText("Stop");
+		else refBtn.setText("Refresh");
 		showInConsole();	// for debug
 	}
 	
@@ -116,24 +125,32 @@ public class Controller implements Initializable {
 		}
 	}
 	
+	public boolean isVacancy(int x, int y){
+		int[][] vacancy = {{3, 5}, {4, 5}, {5, 0}, {5, 5}, {8, 1}, {8, 2}, {8, 3}, {8, 4}};	// the seat which is empty
+		for(int i = 0 ; i < vacancy.length ; i++)
+			for(int j = 0 ; j < 2 ; j++){
+				if(x == vacancy[i][0] && y == vacancy[i][1]) return true;
+			}
+		return false;
+	}
+	
 	public void initSeat(){
-		for(int i = 0 ; i < limitSeatNum ; i++){
+		for(int i = 0 ; i < seats.length ; i++){
 			seats[i].setText(seats[i].initSeat);	// initialize panel
 			seats[i].setSeatNumStrAndInt("0");		// initialize data
 		}
 	}
 	
 	public void stop(){		// cnlBtn trigger
-		System.out.println("stop");
 		System.exit(0);
 	}
 	
 	public void showInConsole(){	// use to debug
 		System.out.println("-------Grid-------");
-		for(int i = 0 ; i < row ; i++){
+		for(int i = 0, num = 0 ; i < row ; i++){
 			for(int j = 0 ; j < column ; j++){
-				if(i*column+j == seatNum) break;
-				System.out.printf("%2d ", seats[i*column+j].getSeatNum());
+				if(isVacancy(i, j)) System.out.print("   ");
+				else System.out.printf("%2d ", seats[num++].getSeatNum());
 			}
 			System.out.println();
 		}

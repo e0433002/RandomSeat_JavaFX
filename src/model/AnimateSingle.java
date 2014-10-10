@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Stack;
 
 import javafx.animation.AnimationTimer;
-import model.AnimateBase;
+import model.AnimateFnSet;
 
 public class AnimateSingle extends AnimationTimer{
 	Stack<Integer> hasBeenSet = new Stack<>();
@@ -28,7 +28,7 @@ public class AnimateSingle extends AnimationTimer{
 		Random ran = new Random();
 		
 		//if(count == 0) this.seatPos = this.showNum;
-		AnimateBase.initGridPerFresh(seats, hasBeenSet);
+		AnimateFnSet.initGridPerFresh(seats, hasBeenSet);
 		
 		if(count == gleamTimes) {	// switch to other seat and set seat
 			count = 0;
@@ -36,12 +36,12 @@ public class AnimateSingle extends AnimationTimer{
 			hasBeenSet.push(seatPos);
 		}
 		else {
-			int randomSeatNum = AnimateBase.getRemainSeatPos(ran, seats, hasBeenSet);
+			int randomSeatNum = AnimateFnSet.getRemainSeatPos(ran, seats, hasBeenSet);
 			seats[randomSeatNum].setText(seats[seatPos].getSeatNumStr());
 			count++;
 		}
 		
-		AnimateBase.sleep(sleepMillis);
+		AnimateFnSet.sleep(sleepMillis);
 		if(count == 0) this.stop();
 	}
 	

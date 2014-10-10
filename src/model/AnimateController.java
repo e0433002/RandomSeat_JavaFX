@@ -1,23 +1,24 @@
 package model;
 
 public class AnimateController {
-	int count = 0;
+	private Boolean isStart = false;
 	AnimateRandom animateRandom;
 	AnimateSingle animateSingle;
 	public AnimateController() {
 //		new AnimateSequnce(seats).start();
-		
 	}
 	
 	public void startAnimateRandom(Seat[] seats){
-		if(animateRandom == null){
+		if(!isStart){
 			animateRandom = new AnimateRandom(seats);
 			animateRandom.start();
+			stateModify();
 		}
 		else{
 			animateRandom.stop();
-			animateRandom = new AnimateRandom(seats);
-			animateRandom.start();
+//			animateRandom = new AnimateRandom(seats);
+//			animateRandom.start();
+			stateModify();
 		}
 	}
 	
@@ -29,6 +30,15 @@ public class AnimateController {
 		else{
 			animateSingle.start(seatNum);
 		}
+	}
+	
+	private void stateModify(){
+		if(isStart) isStart = false;
+		else isStart = true;
+	}
+	
+	public boolean getState(){
+		return isStart;
 	}
 }
 

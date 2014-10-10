@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Stack;
 
 import javafx.animation.AnimationTimer;
-import model.AnimateBase;
+import model.AnimateFnSet;
 
 class AnimateRandom extends AnimationTimer {
 	Stack<Integer> hasBeenSet = new Stack<>();
@@ -22,21 +22,21 @@ class AnimateRandom extends AnimationTimer {
 		Random ran = new Random();
 		
 		// get the arbitrary position's element in first time
-		if(count == 0) this.seatPos = AnimateBase.getRemainSeatPos(ran, seats, hasBeenSet);
+		if(count == 0) this.seatPos = AnimateFnSet.getRemainSeatPos(ran, seats, hasBeenSet);
 		
-		AnimateBase.initGridPerFresh(seats, hasBeenSet);
+		AnimateFnSet.initGridPerFresh(seats, hasBeenSet);
 		if(count == gleamTimes) {	// switch to other seat and set seat
 			count = 0;
 			seats[seatPos].setText(seats[seatPos].getSeatNumStr());
 			hasBeenSet.push(seatPos);
 		}
 		else {
-			int randomSeatNum =  AnimateBase.getRemainSeatPos(ran, seats, hasBeenSet);
+			int randomSeatNum =  AnimateFnSet.getRemainSeatPos(ran, seats, hasBeenSet);
 			seats[randomSeatNum].setText(seats[seatPos].getSeatNumStr());
 			count++;
 		}
 		
-		AnimateBase.sleep(sleepMillis);
-		if(hasBeenSet.size() == AnimateBase.getSeatsSize(seats)) this.stop();	// finish animate
+		AnimateFnSet.sleep(sleepMillis);
+		if(hasBeenSet.size() == AnimateFnSet.getSeatsSize(seats)) this.stop();	// finish animate
 	}
 }
