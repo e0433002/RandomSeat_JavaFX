@@ -4,8 +4,9 @@ public class AnimateController {
 	private Boolean isStart = false;
 	AnimateRandom animateRandom;
 	AnimateSingle animateSingle;
+	
 	public AnimateController() {
-//		new AnimateSequnce(seats).start();
+		
 	}
 	
 	public void startAnimateRandom(Seat[] seats){
@@ -16,8 +17,6 @@ public class AnimateController {
 		}
 		else{
 			animateRandom.stop();
-//			animateRandom = new AnimateRandom(seats);
-//			animateRandom.start();
 			stateModify();
 		}
 	}
@@ -41,4 +40,3 @@ public class AnimateController {
 		return isStart;
 	}
 }
-

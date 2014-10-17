@@ -11,7 +11,7 @@ public class Seat extends Label{
 	
 	public Seat(){
 		this.setText(initSeat);
-		this.setStyle("-fx-margin: 0;"
+		this.setStyle("-fx-margin: 0;" 
 				+ "-fx-padding: 5 10 5 10;"
 				+ "-fx-font-size: 15px;"
 				+ "-fx-text-fill: rgba(255,255,255,1);"
@@ -25,6 +25,8 @@ public class Seat extends Label{
 	}
 	
 	public void setSeatNumStrAndInt(String seatNumStr){
+		if(seatNumStr.length() < 2)		// string Number need fixed span
+			seatNumStr = " " + seatNumStr + " ";
 		this.seatNumStr = seatNumStr;
 		this.seatNum = Integer.parseInt(seatNumStr.trim());
 	}

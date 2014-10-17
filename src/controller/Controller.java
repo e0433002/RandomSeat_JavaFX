@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import controller.Cheater;
 import model.AnimateController;
 import model.Seat;
 import javafx.event.ActionEvent;
@@ -54,13 +55,13 @@ public class Controller implements Initializable {
 		
 		numInput.setText(""+seatNum);
 		
-		submit.setOnAction( (ActionEvent e) -> {
+		submit.setOnAction( (ActionEvent e) -> {	// submit button
 			String s = numInput.getText();
 			seatNum = checkLegal(s);	// reset seaNum
 			row = seatNum / column + 1;	// reset row 
 		});
 		
-		sglBtn.setOnAction( (ActionEvent e) -> {
+		sglBtn.setOnAction( (ActionEvent e) -> {	// single button
 			String s = sglInput.getText();
 			seatNum = checkLegal(s);
 			animateController.startAnimateSingle(seats, seatNum);
@@ -70,8 +71,11 @@ public class Controller implements Initializable {
 	public void refreshSite(ActionEvent event) {	// refBtn trigger
 		seatAssign();
 		animateController.startAnimateRandom(seats);
-		if(animateController.getState()) refBtn.setText("Stop");
-		else refBtn.setText("Refresh");
+		
+		if(animateController.getState())
+			refBtn.setText("Stop");
+		else
+			refBtn.setText("Refresh");
 		showInConsole();	// for debug
 	}
 	
@@ -90,9 +94,12 @@ public class Controller implements Initializable {
 		// set seat number to string and integer
 		for(int i = 0 ; !randomSeatList.isEmpty() ; i++){
 			String insertNum = String.valueOf(randomSeatList.remove(0));
-			if(insertNum.length() < 2) insertNum = " " + insertNum + " ";			
 			seats[i].setSeatNumStrAndInt(insertNum);
 		}
+		
+		// **cheater part**
+		Cheater.startCheats(seats, 7);
+		// ****************
 	}
 	
 	public void showItem(){
