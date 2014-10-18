@@ -24,7 +24,12 @@ public class Seat extends Label{
 		this.y = y;
 	}
 	
-	public void setSeatNumStrAndInt(String seatNumStr){
+	public void setSeatNum(int seatNum){
+		this.seatNum = seatNum;
+		setSeatNum(""+seatNum);
+	}
+	
+	public void setSeatNum(String seatNumStr){
 		if(seatNumStr.length() < 2)		// string Number need fixed span
 			seatNumStr = " " + seatNumStr + " ";
 		this.seatNumStr = seatNumStr;

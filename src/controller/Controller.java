@@ -53,7 +53,11 @@ public class Controller implements Initializable {
 			}
 		}
 		
-		numInput.setText(""+seatNum);
+		iconEnable();
+	}
+	
+	public void iconEnable(){
+		numInput.setText(""+seatNum);	// member number textField
 		
 		submit.setOnAction( (ActionEvent e) -> {	// submit button
 			String s = numInput.getText();
@@ -61,7 +65,7 @@ public class Controller implements Initializable {
 			row = seatNum / column + 1;	// reset row 
 		});
 		
-		sglBtn.setOnAction( (ActionEvent e) -> {	// single button
+		sglBtn.setOnAction( (ActionEvent e) -> {	// single flush button
 			String s = sglInput.getText();
 			seatNum = checkLegal(s);
 			animateController.startAnimateSingle(seats, seatNum);
@@ -72,10 +76,14 @@ public class Controller implements Initializable {
 		seatAssign();
 		animateController.startAnimateRandom(seats);
 		
-		if(animateController.getState())
+		if(animateController.getState()){
 			refBtn.setText("Stop");
-		else
+			sglChkBox.setVisible(false);
+		}
+		else{
 			refBtn.setText("Refresh");
+			sglChkBox.setVisible(true);
+		}
 		showInConsole();	// for debug
 	}
 	
@@ -102,13 +110,13 @@ public class Controller implements Initializable {
 		Cheater.startCheats(randomSeatList, 38);
 		// ****************
 		
-		// checking the number whether all be setting
+		// checking the number whether all be setting, not important
 		if(!isAllSet(randomSeatList.size(), randomSeatList)) System.out.println("not all setting");
 		
 		// set seat number to string and integer
 		for(int i = 0 ; !randomSeatList.isEmpty() ; i++){
 			String insertNum = String.valueOf(randomSeatList.remove(0));
-			seats[i].setSeatNumStrAndInt(insertNum);
+			seats[i].setSeatNum(insertNum);
 		}
 	}
 	
@@ -162,7 +170,7 @@ public class Controller implements Initializable {
 	public void initSeat(){
 		for(int i = 0 ; i < seats.length ; i++){
 			seats[i].setText(seats[i].initSeat);	// initialize panel
-			seats[i].setSeatNumStrAndInt("0");		// initialize data
+			seats[i].setSeatNum("0");		// initialize data
 		}
 	}
 	
