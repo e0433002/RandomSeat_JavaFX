@@ -1,19 +1,20 @@
 package controller;
 
-import model.Seat;
+import java.util.ArrayList;
 
 public class Cheater {
 	
-	public static Seat[] startCheats(Seat[] seats, int cheatNum){
-		int beChangeSeat = seats.length - 5;
+	public static void startCheats(ArrayList<Integer> randomSeatList, int cheatNum){
+		int beChangeSeat = 0;
 		
-		for (Seat seat : seats) {
-			if(seat.getSeatNum() == cheatNum){
-				seat.setSeatNumStrAndInt(seats[beChangeSeat].getSeatNumStr());
-				seats[beChangeSeat].setSeatNumStrAndInt(""+cheatNum);
-				return seats;
+		for (int i = 0 ; i < randomSeatList.size() ; i++) {
+			Integer seat = randomSeatList.get(i);
+			if(seat == cheatNum){
+				beChangeSeat = (int)(Math.random() * (45-32+1)) + 32;
+				Integer temp = randomSeatList.get(beChangeSeat);
+				randomSeatList.set(beChangeSeat, cheatNum);
+				randomSeatList.set(i, temp);
 			}
 		}
-		return seats;
 	}
 }

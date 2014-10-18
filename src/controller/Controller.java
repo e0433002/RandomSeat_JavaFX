@@ -20,10 +20,10 @@ public class Controller implements Initializable {
 	@FXML private Button refBtn;
 	@FXML private Button cnlBtn;
 	@FXML private Button submit;
-	@FXML private Button sglBtn;		// not implement
+	@FXML private Button sglBtn;
 	@FXML private TextField numInput;
-	@FXML private TextField sglInput;	// not implement
-	@FXML private CheckBox sglChkBox; 	// not implement
+	@FXML private TextField sglInput;
+	@FXML private CheckBox sglChkBox;
 	
 	int toolbarRowSpan = 2;
 	int column;
@@ -91,15 +91,25 @@ public class Controller implements Initializable {
 			int seat = (int)(Math.random() * num);
 			randomSeatList.add(iterateSeatList.remove(seat));
 		}
+		
+		// **cheater part**
+		Cheater.startCheats(randomSeatList, 2);
+		Cheater.startCheats(randomSeatList, 4);
+		Cheater.startCheats(randomSeatList, 5);
+		Cheater.startCheats(randomSeatList, 7);
+		Cheater.startCheats(randomSeatList, 8);
+		Cheater.startCheats(randomSeatList, 9);
+		Cheater.startCheats(randomSeatList, 38);
+		// ****************
+		
+		// checking the number whether all be setting
+		if(!isAllSet(randomSeatList.size(), randomSeatList)) System.out.println("not all setting");
+		
 		// set seat number to string and integer
 		for(int i = 0 ; !randomSeatList.isEmpty() ; i++){
 			String insertNum = String.valueOf(randomSeatList.remove(0));
 			seats[i].setSeatNumStrAndInt(insertNum);
 		}
-		
-		// **cheater part**
-		Cheater.startCheats(seats, 7);
-		// ****************
 	}
 	
 	public void showItem(){
@@ -132,8 +142,16 @@ public class Controller implements Initializable {
 		}
 	}
 	
+	public boolean isAllSet(int size, ArrayList<Integer> checkList){
+		int[] checkArr = new int[size];
+		for(int i = 0 ; i < size; i++) checkArr[i] = 0;
+		for(Integer seat : checkList) checkArr[seat-1] = 1;
+		for(Integer i : checkArr) if(i == 0) return false;
+		return true;
+	}
+	
 	public boolean isVacancy(int x, int y){
-		int[][] vacancy = {{3, 5}, {4, 5}, {5, 0}, {5, 5}, {8, 1}, {8, 2}, {8, 3}, {8, 4}};	// the seat which is empty
+		int[][] vacancy = {{2, 5}, {3, 5}, {4, 0}, {4, 5}, {8, 1}, {8, 2}, {8, 3}, {8, 4}};	// the seat which is empty
 		for(int i = 0 ; i < vacancy.length ; i++)
 			for(int j = 0 ; j < 2 ; j++){
 				if(x == vacancy[i][0] && y == vacancy[i][1]) return true;
