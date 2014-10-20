@@ -101,13 +101,7 @@ public class Controller implements Initializable {
 		}
 		
 		// **cheater part**
-		Cheater.startCheats(randomSeatList, 2);
-		Cheater.startCheats(randomSeatList, 4);
-		Cheater.startCheats(randomSeatList, 5);
-		Cheater.startCheats(randomSeatList, 7);
-		Cheater.startCheats(randomSeatList, 8);
-		Cheater.startCheats(randomSeatList, 9);
-		Cheater.startCheats(randomSeatList, 38);
+		Cheater.startCheats(randomSeatList, 2, 4, 5, 7, 8, 9, 38);
 		// ****************
 		
 		// checking the number whether all be setting, not important
